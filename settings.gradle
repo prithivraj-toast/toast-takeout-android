@@ -1,2 +1,5 @@
 rootProject.name='Toast Takeout'
 include ':app'
+include ':login'
+include ':restaurantlist'
+include ':endpoints'
