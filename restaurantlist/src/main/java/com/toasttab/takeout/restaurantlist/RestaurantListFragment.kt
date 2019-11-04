@@ -4,9 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_restaurant_list.*
 
@@ -42,7 +44,13 @@ class RestaurantListFragment : Fragment() {
                     if (currentAdapter == null) {
                         restaurant_list.apply {
                             layoutManager = LinearLayoutManager(context)
-                            adapter = RestaurantListRecyclerViewAdapter(it.data)
+                            adapter = RestaurantListRecyclerViewAdapter(it.data) { shortUrl ->
+                                val deepLink = String.format(
+                                    resources.getString(R.string.url_restaurant_info_formatter),
+                                    shortUrl
+                                )
+                                findNavController().navigate(deepLink.toUri())
+                            }
                         }
                     } else {
                         (currentAdapter as RestaurantListRecyclerViewAdapter).setData(it.data)

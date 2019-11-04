@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_main"
-    app:startDestination="@id/loginFragment">
+    app:startDestination="@id/restaurantListFragment">
 
     <fragment
         android:id="@+id/loginFragment"
@@ -19,12 +19,29 @@
             app:popExitAnim="@anim/nav_default_pop_exit_anim"
             app:popUpToInclusive="false" />
     </fragment>
+
     <fragment
         android:id="@+id/restaurantListFragment"
         android:name="com.toasttab.takeout.restaurantlist.RestaurantListFragment"
         android:label="RestaurantListFragment">
         <deepLink
             android:id="@+id/deepLink"
-            app:uri="@string/url_login" />
+            app:uri="@string/url_restaurant_list" />
+        <action
+            android:id="@+id/action_restaurantListFragment_to_restaurantInfoFragment"
+            app:destination="@id/restaurantInfoFragment" />
     </fragment>
+
+    <fragment
+        android:id="@+id/restaurantInfoFragment"
+        android:name="com.toasttab.restaurantinfo.RestaurantInfoFragment"
+        android:label="RestaurantInfoFragment">
+        <deepLink
+            android:id="@+id/deepLink2"
+            app:uri="@string/url_restaurant_info_deep_link" />
+        <argument
+            android:name="shortUrl"
+            app:argType="string" />
+    </fragment>
+
 </navigation>

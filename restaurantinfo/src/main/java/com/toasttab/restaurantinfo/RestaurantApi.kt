@@ -1,4 +1,4 @@
-package com.toasttab.takeout.restaurantlist
+package com.toasttab.restaurantinfo
 
 import android.util.Log
 import com.google.gson.GsonBuilder
@@ -8,27 +8,26 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
-interface RestaurantListApi {
-    @GET("online-ordering/v1/restaurants/")
-    suspend fun getRestaurantList(
-        @Query("latitude") latitude: Double,
-        @Query("longitude") longitude: Double,
-        @Query("fulfillmentDateTime") fulfillmentDateTime: String = "2019-11-01T16:40:47Z",
-        @Query("diningOption") diningOption: String = "TAKE_OUT"
-    ): Response<List<RestaurantListModel>>
+interface RestaurantApi {
+    @GET("{shortUrl}/v2/menus")
+    suspend fun getRestaurantInfo(
+        @Path("shortUrl") shortUrl: String,
+        @Query("fulfillmentDateTime") fulfillmentDateTime: String = "2019-11-01T16:40:47Z"
+    ): Response<List<RestaurantInfoModel>>
 
     companion object {
-        private const val BASE_URL = "https://ws-preprod-api.eng.toasttab.com/"
-        fun create(): RestaurantListApi {
+        private const val BASE_URL = "https://preprod.eng.toasttab.com/"
+        fun create(): RestaurantApi {
             val gson = GsonBuilder().create()
             return Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .client(okHttpClient)
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build()
-                .create(RestaurantListApi::class.java)
+                .create(RestaurantApi::class.java)
         }
 
         private val okHttpClient: OkHttpClient by lazy {

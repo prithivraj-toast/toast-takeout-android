@@ -1,4 +1,6 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?><!DOCTYPE resources [<!ENTITY url_restaurant_info "https://toasttab.takeout.com/restaurantInfo">]>
 <resources>
-    <string name="url_login">https://toasttab.takeout.com/list</string>
+    <string name="url_restaurant_list">https://toasttab.takeout.com/list</string>
+    <string name="url_restaurant_info_deep_link">&url_restaurant_info;/{shortUrl}</string>
+    <string name="url_restaurant_info_formatter">&url_restaurant_info;/%1$s</string>
 </resources>

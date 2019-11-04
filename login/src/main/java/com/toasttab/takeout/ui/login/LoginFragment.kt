@@ -106,7 +106,7 @@ class LoginFragment : Fragment() {
 
         guestButton.setOnClickListener {
             findNavController().popBackStack()
-            findNavController().navigate(resources.getString(R.string.url_login).toUri())
+            findNavController().navigate(resources.getString(R.string.url_restaurant_list).toUri())
         }
     }
 

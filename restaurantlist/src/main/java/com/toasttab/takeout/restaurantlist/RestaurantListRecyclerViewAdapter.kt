@@ -8,7 +8,10 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 
-class RestaurantListRecyclerViewAdapter(private var items: List<RestaurantListModel>) :
+class RestaurantListRecyclerViewAdapter(
+    private var items: List<RestaurantListModel>,
+    val onClick: (String) -> Unit
+) :
     RecyclerView.Adapter<RestaurantListViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RestaurantListViewHolder =
         RestaurantListViewHolder(
@@ -29,6 +32,9 @@ class RestaurantListRecyclerViewAdapter(private var items: List<RestaurantListMo
         holder.restaurantDistance.text = restaurant.distance.toString()
         holder.restaurantPrepTime.text = restaurant.minimumTakeoutTime.toString()
         holder.restaurantType.text = restaurant.cuisineType
+        holder.itemView.setOnClickListener {
+            onClick(restaurant.shortUrl)
+        }
     }
 
     fun setData(data: List<RestaurantListModel>) {
